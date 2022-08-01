@@ -68,20 +68,11 @@ public class SwiftAwesomeNotificationsPlugin: NSObject, FlutterPlugin, UNUserNot
             }
             else {
 //                 completionHandler([.alert, .badge, .sound])
-		if _originalNotificationCenterDelegate != nil {
-		    _originalNotificationCenterDelegate?.userNotificationCenter?(
-		      center,
-		      willPresent: notification,
-		      withCompletionHandler: completionHandler)
-		}
-		else {
-		  if(notification.request.content.userInfo["gcm.message_id"] != nil){
+		if(notification.request.content.userInfo["gcm.message_id"] != nil){
 		    completionHandler([.badge, .sound])
 		  }else{
 		    completionHandler([.alert, .badge, .sound])
 		  }
-
-		}
             }
         }
     }
